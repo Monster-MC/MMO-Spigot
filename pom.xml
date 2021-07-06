@@ -2,35 +2,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-<<<<<<< HEAD
-    <modelVersion>4.0.0</modelVersion>git
-
-    <groupId>fr.monstermc.mmobungee</groupId>
-    <artifactId>MMO-Bungeecord</artifactId>
-    <version>0.0.1-DEV</version>
-
-    <repositories>
-        <repository>
-            <id>papermc</id>
-            <url>https://papermc.io/repo/repository/maven-public/</url>
-        </repository>
-    </repositories>
-
-    <dependencies>
-        <dependency>
-            <groupId>io.github.waterfallmc</groupId>
-            <artifactId>waterfall-api</artifactId>
-            <version>1.16-R0.4-SNAPSHOT</version>
-            <scope>provided</scope>
-        </dependency>
-    </dependencies>
-=======
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>fr.monstermc.mmospigot</groupId>
     <artifactId>MMO-Spigot</artifactId>
     <version>3.0-SNAPSHOT</version>
->>>>>>> dev
 
     <build>
         <finalName>${project.name}-${project.version}</finalName>
@@ -48,8 +24,6 @@
         </plugins>
     </build>
 
-<<<<<<< HEAD
-=======
     <repositories>
         <repository>
             <id>placeholderapi</id>
@@ -76,7 +50,6 @@
         </dependency>
     </dependencies>
 
->>>>>>> dev
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
