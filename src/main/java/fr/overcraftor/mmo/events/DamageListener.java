@@ -35,7 +35,7 @@ public class DamageListener implements Listener {
         //owner hit golem
         if(e.getEntity() instanceof Golem){
             final EntityGolem golem = ((CraftGolem) e.getEntity()).getHandle();
-            if(!e.getEntity().getCustomName().equals("§c§lGardien"))
+            if(e.getEntity().getCustomName() != null && !e.getEntity().getCustomName().equals("§c§lGardien"))
                 return;
 
             if(e.getDamager() instanceof Player){

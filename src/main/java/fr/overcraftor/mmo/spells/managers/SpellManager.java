@@ -27,7 +27,9 @@ public class SpellManager {
                 new MagicArmorSpell(),
                 new PowerSpell(),
                 new GolemInvocationSpell(),
-                new PushSpell()));
+                new PushSpell(),
+                new ArmageddonSpell(),
+                new SuperPushSpell()));
     }
 
     public void executeSpell(Player p, String spellItemName) {
