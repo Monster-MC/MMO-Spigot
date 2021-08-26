@@ -42,7 +42,7 @@ public class JobInventory{
             i++;
         }
 
-        p.openInventory(inv);
+        p.openInventory(inventory);
     }
 
     public static void onClick(InventoryClickEvent e){
