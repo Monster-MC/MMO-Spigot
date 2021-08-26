@@ -1,6 +1,6 @@
 package fr.overcraftor.mmo.commands.jobscommands;
 
-import fr.overcraftor.mmo.utils.jobs.JobsNames;
+import fr.overcraftor.mmo.utils.jobs.Jobs;
 import fr.overcraftor.mmo.Main;
 import fr.overcraftor.mmo.utils.Permissions;
 import fr.overcraftor.mmo.utils.jobs.JobsXpUtils;
@@ -39,7 +39,7 @@ public class AddXpJobCommand implements CommandExecutor, TabCompleter {
         //variables
         final Player target = Bukkit.getPlayer(args[0]);
         int xp;
-        final JobsNames job = JobsNames.getFromName(args[2]);
+        final Jobs job = Jobs.getFromName(args[2]);
 
         //TARGET
         if(target == null){
@@ -67,7 +67,7 @@ public class AddXpJobCommand implements CommandExecutor, TabCompleter {
             return true;
         }
 
-        final HashMap<JobsNames, Integer> map = Main.jobsXp.get(target);
+        final HashMap<Jobs, Integer> map = Main.jobsXp.get(target);
 
         if(map.get(job) >= 2995000){
             return true;
@@ -92,7 +92,7 @@ public class AddXpJobCommand implements CommandExecutor, TabCompleter {
                 list.add(p.getName());
             }
         }else if(args.length == 3){
-            for(JobsNames job : JobsNames.values()){
+            for(Jobs job : Jobs.values()){
                 list.add(job.toName());
             }
         }

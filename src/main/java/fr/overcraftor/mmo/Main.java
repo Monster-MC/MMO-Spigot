@@ -14,7 +14,7 @@ import fr.overcraftor.mmo.scoreboard.MMOScoreboardManager;
 import fr.overcraftor.mmo.spells.managers.SpellManager;
 import fr.overcraftor.mmo.timers.XpSaveTimer;
 import fr.overcraftor.mmo.utils.guilds.GuildInvitation;
-import fr.overcraftor.mmo.utils.jobs.JobsNames;
+import fr.overcraftor.mmo.utils.jobs.Jobs;
 import fr.overcraftor.mmo.utils.mana.PlayerMana;
 import net.minecraft.server.v1_14_R1.EntityGolem;
 import org.bukkit.Bukkit;
@@ -34,7 +34,7 @@ public class Main extends JavaPlugin {
     private SpellManager spellManager;
     private static Main instance;
 
-    public static final HashMap<Player, HashMap<JobsNames, Integer>> jobsXp = new HashMap<>();
+    public static final HashMap<Player, HashMap<Jobs, Integer>> jobsXp = new HashMap<>();
     public final HashMap<Player, Integer> generalXp = new HashMap<>();
     public final HashMap<Player, PlayerMana> playerMana = new HashMap<>();
     public final HashMap<Player, List<EntityGolem>> customGolems = new HashMap<>();
@@ -45,7 +45,7 @@ public class Main extends JavaPlugin {
     @Override
     public void onEnable() {
         Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "===================================================================");
-        Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "Chargement du plugin" + ChatColor.GOLD + "[" + getName() + "]");
+        Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "Loading plugin" + ChatColor.GOLD + "[" + getName() + "]");
 
         instance = this;
         ConfigManager.init();
@@ -75,7 +75,7 @@ public class Main extends JavaPlugin {
     public void onDisable() {
 
         if(sql != null){
-            for(Map.Entry<Player, HashMap<JobsNames, Integer>> entry : jobsXp.entrySet()){
+            for(Map.Entry<Player, HashMap<Jobs, Integer>> entry : jobsXp.entrySet()){
                 JobsSQL.setAllXp(entry.getValue(), entry.getKey().getUniqueId());
             }
             for(Map.Entry<Player, Integer> entry : generalXp.entrySet()){
@@ -100,7 +100,7 @@ public class Main extends JavaPlugin {
             sql.connect();
             return true;
         } catch (SQLException ignored) {
-            getLogger().warning("La connection MYSQL a echoue, les fonctionnalites du plugin sont desactivees");
+            getLogger().warning("Mysql connnection failed, plugin features are disabled");
             Bukkit.getPluginManager().disablePlugin(this);
         }
         return false;

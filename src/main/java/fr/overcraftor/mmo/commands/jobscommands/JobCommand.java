@@ -3,7 +3,7 @@ package fr.overcraftor.mmo.commands.jobscommands;
 import fr.overcraftor.mmo.Main;
 import fr.overcraftor.mmo.inventories.JobInventory;
 import fr.overcraftor.mmo.utils.Permissions;
-import fr.overcraftor.mmo.utils.jobs.JobsNames;
+import fr.overcraftor.mmo.utils.jobs.Jobs;
 import fr.overcraftor.mmo.utils.jobs.JobsLevel;
 import fr.overcraftor.mmo.utils.jobs.JobsXpUtils;
 import org.bukkit.Bukkit;
@@ -29,7 +29,10 @@ public class JobCommand implements CommandExecutor, TabCompleter {
 
         }else{
             if(!Permissions.JOB_VIEW_OTHER.hasPerm(sender)){
-                sender.sendMessage(ChatColor.RED + "Vous n'avez pas la permission !");
+                if (sender instanceof Player)
+                    JobInventory.openInv((Player) sender);
+                else
+                    sender.sendMessage("§cVous n'avez pas la permission d'executer cette commande !");
                 return true;
             }
             final Player target = Bukkit.getPlayer(args[0]);
@@ -39,20 +42,19 @@ public class JobCommand implements CommandExecutor, TabCompleter {
                 return true;
             }
 
-            final HashMap<JobsNames, Integer> map = Main.jobsXp.get(target);
+            final HashMap<Jobs, Integer> map = Main.jobsXp.get(target);
 
-            final JobsXpUtils wood_cutter = new JobsXpUtils(map.get(JobsNames.WOOD_CUTTER));
-            final JobsXpUtils blacksmith = new JobsXpUtils(map.get(JobsNames.BLACKSMITH));
-            final JobsXpUtils miner = new JobsXpUtils(map.get(JobsNames.MINER));
-            final JobsXpUtils enchanter = new JobsXpUtils(map.get(JobsNames.ENCHANTER));
-            final JobsXpUtils farmer = new JobsXpUtils(map.get(JobsNames.FARMER));
+            StringBuilder sb = new StringBuilder("§eMétiers de §c" + target.getName() + "\n \n");
 
-            sender.sendMessage("§eMétiers de §c" + target.getName() + "\n \n");
-            sender.sendMessage("§6" + JobsNames.WOOD_CUTTER.toName() + "\n§eNiveau: §6" + wood_cutter.getLevels() + "\n§eXP: §6" + wood_cutter.getXpRemain() + "/" + JobsLevel.getFromLevel(wood_cutter.getLevels()).getObjective() + "\n \n");
-            sender.sendMessage("§6" + JobsNames.BLACKSMITH.toName() + "\n§eNiveau: §6" + blacksmith.getLevels() + "\n§eXP: §6" + blacksmith.getXpRemain() + "/" + JobsLevel.getFromLevel(blacksmith.getLevels()).getObjective() + "\n \n");
-            sender.sendMessage("§6" + JobsNames.MINER.toName() + "\n§eNiveau: §6" + miner.getLevels() + "\n§eXP: §6" + miner.getXpRemain() + "/" + JobsLevel.getFromLevel(miner.getLevels()).getObjective() + "\n \n");
-            sender.sendMessage("§6" + JobsNames.ENCHANTER.toName() + "\n§eNiveau: §6" + enchanter.getLevels() + "\n§eXP: §6" + enchanter.getXpRemain() + "/" + JobsLevel.getFromLevel(enchanter.getLevels()).getObjective() + "\n \n");
-            sender.sendMessage("§6" + JobsNames.FARMER.toName() + "\n§eNiveau: §6" + farmer.getLevels() + "\n§eXP: §6" + farmer.getXpRemain() + "/" + JobsLevel.getFromLevel(farmer.getLevels()).getObjective() + "\n \n");
+            for(Jobs job : Jobs.values()){
+                final JobsXpUtils jobXp = new JobsXpUtils(map.get(job));
+
+                sb.append("§6").append(job.toName())
+                        .append("\n§eNiveau : §6").append(jobXp.getLevels())
+                        .append("\n§eXp : §6").append(jobXp.getXpRemain()).append("/").append(JobsLevel.getFromLevel(jobXp.getLevels()).getObjective())
+                        .append("\n \n");
+            }
+            sender.sendMessage(sb.toString());
         }
 
         return false;

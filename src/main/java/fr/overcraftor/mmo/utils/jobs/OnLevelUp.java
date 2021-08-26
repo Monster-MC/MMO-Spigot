@@ -9,7 +9,7 @@ import java.util.List;
 
 public class OnLevelUp {
 
-    public OnLevelUp(Player p, JobsNames job, JobsLevel level){
+    public OnLevelUp(Player p, Jobs job, JobsLevel level){
         if(level == null) return;
 
         final YamlConfiguration config = ConfigManager.levelUpJopConfig;

@@ -1,7 +1,7 @@
 package fr.overcraftor.mmo.commands.jobscommands;
 
 import fr.overcraftor.mmo.Main;
-import fr.overcraftor.mmo.utils.jobs.JobsNames;
+import fr.overcraftor.mmo.utils.jobs.Jobs;
 import fr.overcraftor.mmo.utils.Permissions;
 import fr.overcraftor.mmo.mysql.JobsSQL;
 import org.bukkit.Bukkit;
@@ -35,7 +35,7 @@ public class SetXpJobCommand implements CommandExecutor, TabCompleter {
         //variables
         final Player target = Bukkit.getPlayer(args[0]);
         int xp;
-        final JobsNames job = JobsNames.getFromName(args[2]);
+        final Jobs job = Jobs.getFromName(args[2]);
 
         //TARGET
         if(target == null){
@@ -77,7 +77,7 @@ public class SetXpJobCommand implements CommandExecutor, TabCompleter {
                 list.add(p.getName());
             }
         }else if(args.length == 3){
-            for(JobsNames job : JobsNames.values()){
+            for(Jobs job : Jobs.values()){
                 list.add(job.toName());
             }
         }

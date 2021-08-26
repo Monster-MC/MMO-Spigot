@@ -3,14 +3,12 @@ package fr.overcraftor.mmo.events;
 import fr.overcraftor.mmo.mysql.AptSQL;
 import fr.overcraftor.mmo.mysql.GeneralXpSQL;
 import fr.overcraftor.mmo.mysql.ManaSQL;
-import fr.overcraftor.mmo.utils.ItemBuilder;
 import fr.overcraftor.mmo.utils.aptitude.PlayerAptitude;
-import fr.overcraftor.mmo.utils.jobs.JobsNames;
+import fr.overcraftor.mmo.utils.jobs.Jobs;
 import fr.overcraftor.mmo.Main;
 import fr.overcraftor.mmo.mysql.JobsSQL;
 import fr.overcraftor.mmo.utils.mana.PlayerMana;
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -29,7 +27,7 @@ public class PlayerJoinListener implements Listener {
 
         //JOBS XP
         JobsSQL.checkTableContainUUID(p.getUniqueId());
-        final HashMap<JobsNames, Integer> map = JobsSQL.getXp(p.getUniqueId());
+        final HashMap<Jobs, Integer> map = JobsSQL.getXp(p.getUniqueId());
         Main.jobsXp.put(p, map);
 
         //GENERAL XP

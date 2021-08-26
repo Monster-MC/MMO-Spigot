@@ -4,7 +4,7 @@ import fr.overcraftor.mmo.Main;
 import fr.overcraftor.mmo.mysql.*;
 import fr.overcraftor.mmo.utils.Permissions;
 import fr.overcraftor.mmo.utils.aptitude.PlayerAptitude;
-import fr.overcraftor.mmo.utils.jobs.JobsNames;
+import fr.overcraftor.mmo.utils.jobs.Jobs;
 import fr.overcraftor.mmo.utils.mana.PlayerMana;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
@@ -53,7 +53,7 @@ public class MMOResetCommand implements CommandExecutor {
         GuildSQL.removePlayer(uuid);
 
         if(target.isOnline()){
-            for(JobsNames job : JobsNames.values())
+            for(Jobs job : Jobs.values())
                 Main.jobsXp.get(target.getPlayer()).put(job, 0);
         }
         JobsSQL.setAllXp(Main.jobsXp.get(target.getPlayer()), target.getUniqueId());
